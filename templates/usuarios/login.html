@@ -1,0 +1,50 @@
+{% extends 'shared/base.html' %}
+{% load static %}
+{% block content %}
+
+<section class="galeria" style="margin-left: 5em">
+    <form action="{% url 'login' %}" method="POST">
+        {% csrf_token %}
+        <div class="row">
+            {% for field in form.visible_fields %}
+            <div class="col-12 col-lg-12" style="margin-bottom: 10px;">
+                <label for="{{ field.id_for_label }}" style="color:#D9D9D9; margin-bottom: 5px;">{{field.label}}</label>
+                {{ field }}
+            </div>
+            {% endfor %}
+        </div>
+        <div>
+            <button type="submit" class="btn btn-success col-12" style="padding: top 5px;">Logar</button>
+        </div>
+        <p style="color: #04244F">separar</p>
+        <div>
+            <button type="submit" class="btn btn-success col-12" style="padding: top 5px;">Entrar com o Google</button>
+            <ul class="socialaccount_providers">
+                <!--{% include "socialaccount/snippets/provider_list.html" with process="login" %}-->
+                {% load socialaccount %}
+
+                {% get_providers as socialaccount_providers %}
+
+                {% for provider in socialaccount_providers %}
+                {% if provider.id == "openid" %}
+                {% for brand in provider.get_brands %}
+                <li>
+                    <a title="{{brand.name}}" class="socialaccount_provider {{provider.id}} {{brand.id}}"
+                        href="{% provider_login_url provider openid=brand.openid_url process=process %}">{{brand.name}}</a>
+                </li>
+                {% endfor %}
+                {% endif %}
+                <li>
+                    <a title="{{provider.name}}" class="socialaccount_provider {{provider.id}}"
+                        href="{% provider_login_url provider process=process scope=scope auth_params=auth_params %}">{{provider.name}}</a>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </form>
+</section>
+</main>
+</div>
+</body>
+
+{% endblock %}

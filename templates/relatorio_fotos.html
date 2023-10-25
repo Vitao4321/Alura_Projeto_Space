@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Relatório de Fotos</title>
+</head>
+
+<body>
+    <center>
+        <h1>Relatório de Fotos</h1>
+        <h2>Alura Space</h2>
+    </center>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Título</th>
+                <th>Descrição</th>
+                <th>Categoria</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for registro in registros %}
+            <tr>
+                <td>{{ registro.id }}</td>
+                <td>{{ registro.nome }}</td>
+                <td>{{ registro.descricao }}</td>
+                <td>{{ registro.categoria }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+
+</html>

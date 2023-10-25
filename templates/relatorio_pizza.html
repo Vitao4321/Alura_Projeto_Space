@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Relatório de Pizza</title>
+    <!-- Inclua a biblioteca Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        #myPieChart {
+            max-width: 400px; 
+            max-height: 400px; 
+        }
+    </style>
+</head>
+
+<body>
+    <section>
+        <h1>Relatório de Pizza</h1>
+    </section>
+    <canvas id="myPieChart" width="400" height="400"></canvas>
+
+    <script>
+        
+        console.log('Labels:', labels);
+        console.log('Valores:', valores);
+        var labels = {{ labels| safe }};
+        var valores = {{ valores| safe }};
+
+
+        // Crie o gráfico de pizza usando Chart.js
+        var ctx = document.getElementById('myPieChart').getContext('2d');
+        var myPieChart = new Chart(ctx, {
+            type: 'pie',
+            data: {
+                labels: labels,
+                datasets: [{
+                    data: valores,
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.7)',
+                        'rgba(54, 162, 235, 0.7)',
+                        'rgba(255, 206, 86, 0.7)',
+                        'rgba(75, 192, 192, 0.7)'
+                        // Adicione mais cores conforme necessário
+                    ]
+                }]
+            },
+            options: {
+                // Opções do gráfico, se necessário
+            }
+        });
+    </script>
+</body>
+
+</html>
+

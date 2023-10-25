@@ -1,0 +1,31 @@
+<center>
+    <h1>Relatorio de Alterações</h1>
+    <h2>Alura Space</h2>
+</center>
+
+<table border="1">
+    <thead>
+        <tr>
+            <th>Ação</th>
+            <th>Usuário</th>
+            <th>Data</th>
+            <th>Alterações</th>
+            <th>Modificação</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for registro in registros %}
+            <tr>
+                <td>{{ registro.action_flag }}</td>
+                <td>{{ registro.user.username }}</td>
+                <td>{{ registro.action_time }}</td>
+                <td>{{ registro.object_repr|slice:"11:" }}</td>
+                <td>{{ registro.change_message|slice:"25:"|slice:"-4" }}</td>
+            </tr>
+        {% empty %}
+            <tr>
+                <td colspan="4">Nenhum registro disponível.</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
